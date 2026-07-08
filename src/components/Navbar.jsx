@@ -17,17 +17,19 @@ const Navbar = ({ activePage }) => {
 
   const handleNavClick = (id) => {
     const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
+  };
+
+  const getIsActive = (tabId) => {
+    return activePage === tabId;
   };
 
   return (
     <nav className="navbar">
       <div className="nav-content">
-        <div className="logo" style={{ cursor: 'pointer' }} onClick={() => handleNavClick('home')}>
-          NBSR_
+        <div className="logo" style={{ cursor: 'pointer', fontFamily: 'var(--font-code)', fontSize: '1.4rem', letterSpacing: '1px' }} onClick={() => handleNavClick('home')}>
+          [BSR]
         </div>
         
         {/* Desktop Menu */}
@@ -36,11 +38,35 @@ const Navbar = ({ activePage }) => {
             <button
               key={tab.id}
               onClick={() => handleNavClick(tab.id)}
-              className={`nav-btn ${activePage === tab.id ? 'active' : ''}`}
+              className={`nav-btn ${getIsActive(tab.id) ? 'active' : ''}`}
             >
               {tab.label}
             </button>
           ))}
+        </div>
+
+        {/* Right Side Action */}
+        <div className="nav-actions" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <button 
+            className="reach-out-btn" 
+            onClick={() => handleNavClick('contact')}
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--accent-color)',
+              color: 'var(--accent-color)',
+              padding: '0.4rem 1.2rem',
+              borderRadius: '20px',
+              fontFamily: 'var(--font-code)',
+              fontSize: '0.8rem',
+              letterSpacing: '1px',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            }}
+            onMouseOver={(e) => { e.target.style.background = 'var(--accent-color)'; e.target.style.color = 'var(--bg-color)'; }}
+            onMouseOut={(e) => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--accent-color)'; }}
+          >
+            REACH OUT
+          </button>
         </div>
 
         {/* Hamburger Icon */}
@@ -57,7 +83,7 @@ const Navbar = ({ activePage }) => {
           <button
             key={tab.id}
             onClick={() => handleNavClick(tab.id)}
-            className={`nav-btn mobile-nav-btn ${activePage === tab.id ? 'active' : ''}`}
+            className={`nav-btn mobile-nav-btn ${getIsActive(tab.id) ? 'active' : ''}`}
           >
             {tab.label}
           </button>

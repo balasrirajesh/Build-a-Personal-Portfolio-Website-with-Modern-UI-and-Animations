@@ -1,62 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const About = () => {
+  const [terminalText, setTerminalText] = useState('');
+  const fullText = `> SYSTEM BOOT SEQUENCE INITIATED...
+> LOADING KERNEL... OK
+> MOUNTING FILE SYSTEMS... OK
+> INITIALIZING DEV ENVIRONMENT...
+  - DART SDK VERIFIED
+  - JAVA RUNTIME VERIFIED
+  - PYTHON ENV ACTIVATED
+> STARTING LOCALHOST... 
+> LISTENING ON PORT 8080...
+> ALL SYSTEMS NOMINAL. READY FOR DEVELOPMENT.`;
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTerminalText(fullText.substring(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(interval);
+    }, 20); // Fast typing speed
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="section">
-      <h2 className="section-title">About Me</h2>
-      <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}>
+    <section id="about" className="section" style={{ padding: '120px 5%' }}>
+      <div className="about-split-layout" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '4rem',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        alignItems: 'center'
+      }}>
         
-        <div className="about-text glass-card" style={{ padding: '2rem' }}>
-          <h3>Introduction</h3>
-          <p>
-            Hi, I'm Narendrapurapu Bala Sri Rajesh, a passionate Computer Science Engineering student with a strong interest in Flutter Development, Full Stack Development, and UI/UX Design. I enjoy building modern, user-friendly applications that solve real-world problems and continuously explore new technologies to improve my development skills. My goal is to become a skilled software engineer who creates impactful and innovative digital solutions.
+        {/* Left Side: Text Content */}
+        <div className="about-content">
+          <p className="hero-greeting" style={{ marginBottom: '2rem' }}>ABOUT ME</p>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.8' }}>
+            I'm a Computer Science undergraduate building systems that are meant to last. My work sits at the intersection of cross-platform mobile development and full-stack architecture—where the engineering decisions made early determine everything that follows.
           </p>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.8' }}>
+            My primary tools are <strong style={{color: 'var(--text-primary)'}}>Dart</strong> and <strong style={{color: 'var(--text-primary)'}}>Java</strong>. On the frontend, I build seamless, cross-platform mobile applications with <strong style={{color: 'var(--text-primary)'}}>Flutter</strong>. On the backend, I design reliable APIs and scalable services—systems built around clean separation of concerns and robust data flow.
+          </p>
+
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '3rem', lineHeight: '1.8' }}>
+            I'm methodical about system design, opinionated about code quality, and serious about building things that work correctly under real-world conditions.
+          </p>
+
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            {['B.Tech CSE', '2023 - 2027', 'Open to Work'].map((pill, i) => (
+              <span key={i} style={{
+                border: '1px solid var(--text-secondary)',
+                color: 'var(--text-secondary)',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                fontFamily: 'var(--font-code)',
+                fontSize: '0.85rem'
+              }}>{pill}</span>
+            ))}
+          </div>
         </div>
 
-        <div className="about-text glass-card" style={{ padding: '2rem' }}>
-          <h3>Education</h3>
-          <ul style={{ listStyleType: 'none', marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-            <li><strong style={{color: 'var(--accent-color)'}}>Degree:</strong> Bachelor of Technology (B.Tech) in Computer Science and Engineering</li>
-            <li><strong style={{color: 'var(--accent-color)'}}>College:</strong> Aditya College Of Engineering and Technology</li>
-            <li><strong style={{color: 'var(--accent-color)'}}>Academic Year:</strong> 2023 – 2027</li>
-            <li><strong style={{color: 'var(--accent-color)'}}>Current Year:</strong> 4th Year</li>
-          </ul>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-          <div className="about-text glass-card" style={{ padding: '2rem' }}>
-            <h3>Interests & Goals</h3>
-            <h4 style={{marginTop: '1rem', color: 'var(--text-secondary)'}}>Interests</h4>
-            <div className="tags" style={{ marginBottom: '1.5rem' }}>
-              {['Flutter App Development', 'Full Stack Web Development', 'UI/UX Design', 'Cloud Computing (AWS)', 'Mobile Application Development', 'Open Source', 'Learning New Tech'].map((item, index) => (
-                <span key={index} className="tag">{item}</span>
-              ))}
-            </div>
-            
-            <h4 style={{color: 'var(--text-secondary)'}}>Career Goals</h4>
-            <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem', color: 'var(--text-secondary)' }}>
-              <li>Become a Full Stack Software Engineer.</li>
-              <li>Build scalable and user-friendly applications.</li>
-              <li>Contribute to open-source projects.</li>
-              <li>Continuously improve problem-solving and development skills.</li>
-              <li>Work on innovative products that create a positive impact.</li>
-            </ul>
+        {/* Right Side: Terminal Window */}
+        <div className="glass-card terminal-window" style={{ 
+          padding: '2rem', 
+          height: '100%', 
+          minHeight: '400px',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundImage: 'linear-gradient(rgba(0, 230, 150, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 150, 0.03) 1px, transparent 1px)',
+          backgroundSize: '20px 20px'
+        }}>
+          <div style={{ 
+            fontFamily: 'var(--font-code)', 
+            color: 'var(--text-secondary)', 
+            fontSize: '0.75rem', 
+            marginBottom: '2rem',
+            letterSpacing: '1px'
+          }}>
+            ARCHITECTURE / RUNTIME
+          </div>
+          
+          <div style={{
+            fontFamily: 'var(--font-code)',
+            color: 'var(--text-primary)',
+            fontSize: '0.9rem',
+            lineHeight: '1.8',
+            whiteSpace: 'pre-wrap'
+          }}>
+            {terminalText}
+            <span className="cursor blink" style={{ color: 'var(--accent-color)' }}>_</span>
           </div>
 
-          <div className="about-text glass-card" style={{ padding: '2rem' }}>
-            <h3>Languages</h3>
-            <h4 style={{marginTop: '1rem', color: 'var(--text-secondary)'}}>Programming Languages</h4>
-            <div className="tags" style={{ marginBottom: '1.5rem' }}>
-              {['Dart', 'Java', 'Python', 'C', 'JavaScript', 'SQL'].map((item, index) => (
-                <span key={index} className="tag">{item}</span>
-              ))}
-            </div>
-            <h4 style={{color: 'var(--text-secondary)'}}>Spoken Languages</h4>
-            <div className="tags">
-              {['Telugu', 'Hindi', 'English', 'Japaneese (learning)'].map((lang, index) => (
-                <span key={index} className="tag">{lang}</span>
-              ))}
-            </div>
+          <div style={{ 
+            marginTop: 'auto', 
+            paddingTop: '2rem',
+            fontStyle: 'italic', 
+            color: 'var(--text-secondary)',
+            fontSize: '0.95rem'
+          }}>
+            "Systems designed to survive real usage."
           </div>
         </div>
 

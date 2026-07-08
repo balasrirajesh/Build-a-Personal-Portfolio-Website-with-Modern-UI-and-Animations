@@ -1,53 +1,95 @@
 import React from 'react';
-import { FaCode, FaMobileAlt, FaServer, FaDatabase, FaCloud, FaTools } from 'react-icons/fa';
+import { 
+  SiDart, SiPython, SiC, SiJavascript, 
+  SiFlutter, SiHtml5, SiReact, 
+  SiFirebase, SiNodedotjs, SiExpress, 
+  SiMysql, SiMongodb,
+  SiGit, SiGithub, SiDocker, SiJenkins, SiPostman, SiPrisma, SiApachekafka, SiRabbitmq, SiTypescript, SiPostgresql, SiRedis, SiApachemaven
+} from 'react-icons/si';
+import { FaJava, FaCss3Alt, FaTools } from 'react-icons/fa';
 
 const Skills = () => {
-  const skillCategories = [
+  const bentoCategories = [
     {
-      title: 'Programming Languages',
-      icon: <FaCode />,
-      skills: ['Dart', 'Java', 'Python', 'C', 'JavaScript']
+      title: 'LANGUAGES',
+      gridArea: 'lang',
+      skills: [
+        { name: 'JAVA', icon: <FaJava /> },
+        { name: 'DART', icon: <SiDart /> },
+        { name: 'JAVASCRIPT', icon: <SiJavascript /> },
+        { name: 'TYPESCRIPT', icon: <SiTypescript /> },
+        { name: 'C', icon: <SiC /> },
+        { name: 'HTML', icon: <SiHtml5 /> },
+        { name: 'CSS', icon: <FaCss3Alt /> },
+        { name: 'PYTHON', icon: <SiPython /> }
+      ]
     },
     {
-      title: 'Frontend & Mobile',
-      icon: <FaMobileAlt />,
-      skills: ['Flutter', 'HTML5', 'CSS3', 'UI/UX Design', 'Responsive Web Design']
+      title: 'FRAMEWORKS & RUNTIMES',
+      gridArea: 'frame',
+      skills: [
+        { name: 'SPRING BOOT', icon: <FaJava /> },
+        { name: 'FLUTTER', icon: <SiFlutter /> },
+        { name: 'NODE.JS', icon: <SiNodedotjs /> },
+        { name: 'EXPRESS.JS', icon: <SiExpress /> },
+        { name: 'REACT', icon: <SiReact /> },
+        { name: 'PRISMA', icon: <SiPrisma /> }
+      ]
     },
     {
-      title: 'Backend',
-      icon: <FaServer />,
-      skills: ['Firebase', 'Node.js', 'Express.js', 'REST APIs', 'Auth Systems']
+      title: 'DATABASES',
+      gridArea: 'db',
+      skills: [
+        { name: 'MYSQL', icon: <SiMysql /> },
+        { name: 'POSTGRESQL', icon: <SiPostgresql /> },
+        { name: 'MONGODB', icon: <SiMongodb /> },
+        { name: 'REDIS', icon: <SiRedis /> },
+        { name: 'FIREBASE', icon: <SiFirebase /> }
+      ]
     },
     {
-      title: 'Database',
-      icon: <FaDatabase />,
-      skills: ['MySQL', 'SQL', 'MongoDB', 'Real-time Database']
+      title: 'MESSAGE BROKERS',
+      gridArea: 'brokers',
+      skills: [
+        { name: 'RABBITMQ', icon: <SiRabbitmq /> },
+        { name: 'KAFKA', icon: <SiApachekafka /> }
+      ]
     },
     {
-      title: 'Cloud & Deployment',
-      icon: <FaCloud />,
-      skills: ['Google Cloud Platform (GCP)', 'AWS Basics', 'Render']
-    },
-    {
-      title: 'Development Tools',
-      icon: <FaTools />,
-      skills: ['Git', 'GitHub', 'Docker', 'Jenkins', 'VS Code', 'Android Studio', 'Postman']
+      title: 'DEVOPS & TOOLS',
+      gridArea: 'devops',
+      skills: [
+        { name: 'DOCKER', icon: <SiDocker /> },
+        { name: 'MAVEN', icon: <SiApachemaven /> },
+        { name: 'GIT', icon: <SiGit /> },
+        { name: 'GITHUB', icon: <SiGithub /> },
+        { name: 'POSTMAN', icon: <SiPostman /> },
+        { name: 'SONARQUBE', icon: <FaTools /> },
+        { name: 'JENKINS', icon: <SiJenkins /> }
+      ]
     }
   ];
 
   return (
-    <section id="skills" className="section">
-      <h2 className="section-title">Technical Skills</h2>
-      <div className="skills-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-        {skillCategories.map((category, index) => (
-          <div key={index} className="glass-card skill-category" style={{ padding: '2rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', color: 'var(--accent-color)', fontSize: '1.5rem' }}>
-              {category.icon}
-              <h3 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--text-primary)' }}>{category.title}</h3>
+    <section id="skills" className="section fade-in-up">
+      <h2 className="section-title" style={{ marginBottom: '4rem', textAlign: 'center' }}>Technical Skills</h2>
+      
+      <div className="bento-grid">
+        {bentoCategories.map((category, index) => (
+          <div key={index} className="bento-category glass-card" data-area={category.gridArea}>
+            <div className="bento-header">
+              {category.title}
             </div>
-            <div className="tags">
+            <div className="bento-items">
               {category.skills.map((skill, i) => (
-                <span key={i} className="tag">{skill}</span>
+                <div key={i} className="skill-box" title={skill.name}>
+                  <div className="skill-box-icon">
+                    {skill.icon}
+                  </div>
+                  <div className="skill-box-name">
+                    {skill.name}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

@@ -46,7 +46,7 @@ const Experience = () => {
   return (
     <section id="experience" className="section">
       <h2 className="section-title">Experience</h2>
-      <div className="timeline" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+      <div className="timeline" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '2rem', width: '100%', margin: '0 auto' }}>
         {experiences.map((exp, index) => (
           <div key={index} className="glass-card" style={{ padding: '2rem', position: 'relative' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>

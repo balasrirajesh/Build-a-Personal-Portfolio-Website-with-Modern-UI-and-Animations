@@ -11,34 +11,44 @@ const Hero = () => {
 
   return (
     <header className="hero">
-      <div className="hero-content fade-in-up">
-        <div className="hero-image-container">
-          <img src="/assets/hero.png" alt="Narendrapurapu Bala Sri Rajesh" className="hero-image" />
-          <div className="hero-image-overlay"></div>
-        </div>
-        <h1 className="huge-text">Hi, I'm Rajesh</h1>
-        <h2 className="hero-role">App Developer <span className="highlight">|</span> Web Developer</h2>
+      <div className="hero-grid fade-in-up">
         
-        <div className="hero-cta" style={{marginTop: '2rem', marginBottom: '2rem'}}>
-          <button onClick={() => handleScroll('resume')} className="btn primary-btn">Download Resume</button>
-          <button onClick={() => handleScroll('projects')} className="btn secondary-btn">View Projects</button>
-          <button onClick={() => handleScroll('contact')} className="btn secondary-btn">Contact Me</button>
+        {/* Left Column: Massive Typography */}
+        <div className="hero-left">
+          <p className="hero-greeting">HELLO, I'M</p>
+          <h1 className="huge-text">
+            Bala<br/>Sri<br/>Rajesh
+          </h1>
+          <p className="hero-tagline">
+            <span className="accent-line"></span> Full Stack Developer & Backend Engineer
+          </p>
+          
+          <div className="hero-socials">
+            <a href="https://github.com/balasrirajesh" target="_blank" rel="noreferrer" className="social-icon"><FaGithub /> GitHub</a>
+            <a href="https://www.linkedin.com/in/bala-sri-rajesh-narendrapurapu-20b44a291/" target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /> LinkedIn</a>
+          </div>
+
+          <button onClick={() => handleScroll('resume')} className="btn primary-btn hero-resume-btn" style={{marginTop: '2rem'}}>
+            <span style={{marginRight: '10px'}}>⬇</span> RESUME
+          </button>
         </div>
 
-        <div className="hero-socials">
-          <a href="https://github.com/balasrirajesh" target="_blank" rel="noreferrer" className="social-icon"><FaGithub /></a>
-          <a href="https://www.linkedin.com/in/bala-sri-rajesh-narendrapurapu-20b44a291/" target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /></a>
-          <a href="mailto:narendrapurapubalasrirajesh@gmail.com" className="social-icon"><FaEnvelope /></a>
+        {/* Center Column: Portrait Image */}
+        <div className="hero-center">
+          <div className="hero-image-container">
+            <img src="/assets/hero.png" alt="Narendrapurapu Bala Sri Rajesh" className="hero-image" />
+          </div>
         </div>
-      </div>
-      
-      {/* Animated floating particles (pure CSS) */}
-      <div className="particles">
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
+
+        {/* Right Column: Roles */}
+        <div className="hero-right">
+          <h2 className="hero-role-title">Full Stack<br/>Developer</h2>
+          <h2 className="hero-role-title">Backend<br/>Engineer</h2>
+          <p className="hero-availability">
+            <span className="accent-dash">-</span> Currently available for opportunities
+          </p>
+        </div>
+
       </div>
     </header>
   );

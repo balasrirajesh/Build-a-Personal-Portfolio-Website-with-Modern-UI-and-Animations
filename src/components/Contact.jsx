@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import ScrollReveal from './ScrollReveal';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -6,9 +8,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('TRANSMITTING...');
+    setStatus('Sending...');
     
-    // NOTE: You must replace this placeholder with your actual Web3Forms access key
+    // NOTE: Replace with actual Web3Forms access key
     const accessKey = "YOUR_WEB3FORMS_ACCESS_KEY_HERE";
     
     if (accessKey === "YOUR_WEB3FORMS_ACCESS_KEY_HERE") {
@@ -32,131 +34,151 @@ const Contact = () => {
       
       const result = await response.json();
       if (result.success) {
-        setStatus('TRANSMISSION SUCCESSFUL');
+        setStatus('Message sent successfully!');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus(''), 5000);
       } else {
-        setStatus('TRANSMISSION FAILED');
+        setStatus('Failed to send message.');
         setTimeout(() => setStatus(''), 5000);
       }
     } catch (error) {
-      setStatus('TRANSMISSION ERROR');
+      console.error('Contact submission error:', error);
+      setStatus('An error occurred.');
       setTimeout(() => setStatus(''), 5000);
     }
   };
 
   return (
     <section id="contact" className="section" style={{ padding: '120px 5%' }}>
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', overflow: 'hidden' }}>
-          
-          {/* Left Panel: Console Feed */}
-          <div style={{ padding: '3rem', borderRight: '1px solid var(--card-border)', display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ fontFamily: 'var(--font-code)', fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '2rem', letterSpacing: '2px' }}>
-              &gt;_ SYS.CONSOLE_FEED
-            </h3>
-            <div style={{ width: '100%', height: '1px', background: 'var(--card-border)', marginBottom: '2rem' }}></div>
+        <ScrollReveal animation="fade-up">
+          <h2 className="section-title">Get In Touch</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
+            I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my inbox is open!
+          </p>
+        </ScrollReveal>
+
+        {/* Contact Links: Required clickable mailto, GitHub and LinkedIn profile links */}
+        <ScrollReveal animation="fade-up" delay={100}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '2.5rem', 
+            marginBottom: '3.5rem', 
+            flexWrap: 'wrap',
+            fontFamily: 'var(--font-code)',
+            fontSize: '0.95rem'
+          }}>
+            <a 
+              href="mailto:balasrirajesh.n@gmail.com" 
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)', transition: 'color 0.3s' }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent-color)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            >
+              <FaEnvelope style={{ color: 'var(--accent-color)' }} /> balasrirajesh.n@gmail.com
+            </a>
+            <a 
+              href="https://github.com/balasrirajesh" 
+              target="_blank" 
+              rel="noreferrer" 
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)', transition: 'color 0.3s' }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent-color)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            >
+              <FaGithub style={{ color: 'var(--accent-color)' }} /> GitHub
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/bala-sri-rajesh-narendrapurapu-20b44a291/" 
+              target="_blank" 
+              rel="noreferrer" 
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)', transition: 'color 0.3s' }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent-color)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            >
+              <FaLinkedin style={{ color: 'var(--accent-color)' }} /> LinkedIn
+            </a>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal animation="fade-up" delay={200}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
             
-            <div style={{ fontFamily: 'var(--font-code)', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '2' }}>
-              <p>[00:00:00] SYSTEM.READY // UPLINK GATEWAY STABLE</p>
-              <p>[00:00:01] ENDPOINT DETECTED: api.web3forms.com</p>
-              <p style={{ marginTop: '2rem' }}>AWAITING_PAYLOAD...</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: '500' }}>Name</label>
+              <input 
+                type="text" 
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                style={{ background: 'transparent', border: 'none', borderBottom: '2px solid var(--text-secondary)', padding: '1rem 0', color: 'var(--text-primary)', fontSize: '1rem', outline: 'none', transition: 'border-color 0.3s' }}
+                onFocus={(e) => e.target.style.borderBottomColor = 'var(--accent-color)'}
+                onBlur={(e) => e.target.style.borderBottomColor = 'var(--text-secondary)'}
+                required
+              />
             </div>
 
-            <div style={{ marginTop: 'auto', paddingTop: '4rem', fontFamily: 'var(--font-code)', fontSize: '0.7rem', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
-              <p>ACCESS_KEY: eb45e3d...35be</p>
-              <p>SECURE_SHIELDS: ACTIVE (TLS 1.3)</p>
-              <p>GATEWAY ORBITAL STRETCH</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: '500' }}>Email</label>
+              <input 
+                type="email" 
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                style={{ background: 'transparent', border: 'none', borderBottom: '2px solid var(--text-secondary)', padding: '1rem 0', color: 'var(--text-primary)', fontSize: '1rem', outline: 'none', transition: 'border-color 0.3s' }}
+                onFocus={(e) => e.target.style.borderBottomColor = 'var(--accent-color)'}
+                onBlur={(e) => e.target.style.borderBottomColor = 'var(--text-secondary)'}
+                required
+              />
             </div>
-          </div>
 
-          {/* Right Panel: Form Inputs */}
-          <div style={{ padding: '3rem' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <label style={{ fontFamily: 'var(--font-code)', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  SENDER_IDENTITY
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="ENTER YOUR NAME..."
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid var(--card-border)', borderRadius: '8px', padding: '1rem', color: 'var(--text-primary)', fontFamily: 'var(--font-code)', fontSize: '0.9rem', outline: 'none' }}
-                />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label style={{ color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: '500' }}>Message</label>
+              <textarea 
+                rows="4"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                style={{ background: 'transparent', border: 'none', borderBottom: '2px solid var(--text-secondary)', padding: '1rem 0', color: 'var(--text-primary)', fontSize: '1rem', outline: 'none', resize: 'none', transition: 'border-color 0.3s' }}
+                onFocus={(e) => e.target.style.borderBottomColor = 'var(--accent-color)'}
+                onBlur={(e) => e.target.style.borderBottomColor = 'var(--text-secondary)'}
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" style={{
+              background: 'var(--accent-color)',
+              color: '#fff',
+              border: 'none',
+              padding: '1rem 2rem',
+              borderRadius: '30px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              marginTop: '2rem',
+              alignSelf: 'center',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 0 15px rgba(255, 87, 34, 0.4)'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 87, 34, 0.6)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 87, 34, 0.4)'; }}
+            >
+              Say Hello
+            </button>
+            
+            {status && (
+              <div style={{ 
+                fontSize: '0.9rem', 
+                color: status.includes('success') ? '#4ade80' : status.includes('error') || status.includes('Failed') ? '#ef4444' : 'var(--text-secondary)', 
+                textAlign: 'center', 
+                marginTop: '1rem'
+              }}>
+                {status}
               </div>
+            )}
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <label style={{ fontFamily: 'var(--font-code)', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  RETURN_COORDINATES
-                </label>
-                <input 
-                  type="email" 
-                  placeholder="ENTER YOUR EMAIL..."
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid var(--card-border)', borderRadius: '8px', padding: '1rem', color: 'var(--text-primary)', fontFamily: 'var(--font-code)', fontSize: '0.9rem', outline: 'none' }}
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <label style={{ fontFamily: 'var(--font-code)', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  &gt;_ MESSAGE_PAYLOAD
-                </label>
-                <textarea 
-                  rows="5"
-                  placeholder="="
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid var(--card-border)', borderRadius: '8px', padding: '1rem', color: 'var(--text-primary)', fontFamily: 'var(--font-code)', fontSize: '0.9rem', outline: 'none', resize: 'vertical' }}
-                ></textarea>
-              </div>
-
-              <button type="submit" style={{
-                background: 'var(--text-primary)',
-                color: 'var(--bg-color)',
-                border: 'none',
-                padding: '1.2rem',
-                borderRadius: '8px',
-                fontFamily: 'var(--font-code)',
-                fontSize: '0.9rem',
-                fontWeight: 'bold',
-                letterSpacing: '1px',
-                cursor: 'pointer',
-                marginTop: '1rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '0.5rem',
-                transition: 'transform 0.2s'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-              >
-                TRANSMIT UPLINK <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </button>
-              
-              {status && (
-                <div style={{ 
-                  fontFamily: 'var(--font-code)', 
-                  fontSize: '0.8rem', 
-                  color: status.includes('SUCCESS') ? '#4ade80' : status.includes('ERROR') || status.includes('FAILED') ? '#ef4444' : 'var(--text-secondary)', 
-                  textAlign: 'center', 
-                  marginTop: '0.5rem',
-                  letterSpacing: '1px'
-                }}>
-                  {status}
-                </div>
-              )}
-
-            </form>
-          </div>
-        </div>
-
+          </form>
+        </ScrollReveal>
       </div>
     </section>
   );

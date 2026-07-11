@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaAward, FaExternalLinkAlt } from 'react-icons/fa';
+import ScrollReveal from './ScrollReveal';
 
 const Certifications = () => {
   const certs = [
@@ -22,10 +23,34 @@ const Certifications = () => {
 
   return (
     <section id="certifications" className="section">
-      <h2 className="section-title">Certifications</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
+      <ScrollReveal animation="fade-up">
+        <h2 className="section-title">Certifications</h2>
+      </ScrollReveal>
+      
+      {/* Fully responsive bento-like grid using auto-fit minmax */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', 
+        gap: '1.5rem', 
+        maxWidth: '1400px', 
+        margin: '0 auto' 
+      }}>
         {certs.map((cert, i) => (
-          <div key={i} className="glass-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          <ScrollReveal 
+            key={i} 
+            animation="fade-up" 
+            delay={(i % 5) * 80}
+            as="div"
+            className="glass-card"
+            style={{ 
+              padding: '1.5rem', 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              textAlign: 'center',
+              height: '100%'
+            }}
+          >
             <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: 'rgba(255, 87, 34, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
               <FaAward size={40} />
             </div>
@@ -36,7 +61,7 @@ const Certifications = () => {
                  <FaExternalLinkAlt /> View Certificate
                </a>
             </div>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </section>

@@ -22,10 +22,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   cursor: none;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px; /* Blueprint/industrial grid effect */
 }
 a, button, input, textarea, .radar-point-container, .glass-card { 
   cursor: none !important; 
@@ -106,9 +102,11 @@ ul { list-style: none; }
 .highlight { color: var(--accent-color); }
 
 .glass-card {
-  background: var(--card-bg); backdrop-filter: blur(10px);
-  border: 1px solid var(--card-border); border-radius: 16px; padding: 2.5rem;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.4s ease;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
 }
@@ -122,8 +120,6 @@ ul { list-style: none; }
 }
 .glass-card:hover { 
   transform: translateY(-8px); 
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 87, 34, 0.15); 
-  background: rgba(17, 34, 64, 0.9);
 }
 
 /* Page Transitions */
@@ -257,6 +253,22 @@ ul { list-style: none; }
   .hero-right { gap: 1rem; }
 }
 
+.about-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .about-split-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 .about-grid { display: flex; justify-content: center; }
 .about-text p { font-size: 1.1rem; margin-bottom: 1.5rem; }
 .edu-details { margin-bottom: 2rem; background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color); }
@@ -379,8 +391,8 @@ footer { text-align: center; padding: 2rem; border-top: 1px solid var(--card-bor
   .bento-category[data-area="devops"] { grid-column: span 4; }
 }
 .bento-category {
-  background: rgba(10, 25, 47, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  border: 1px solid var(--card-border);
   border-radius: 16px;
   padding: 1.8rem;
   transition: border-color 0.3s ease;
@@ -428,3 +440,103 @@ footer { text-align: center; padding: 2rem; border-top: 1px solid var(--card-bor
 .cert-list { list-style-type: none; padding-left: 0; color: var(--text-secondary); width: 100%; }
 .cert-list li { margin-bottom: 1rem; font-size: 1.05rem; padding-left: 1.5rem; position: relative; }
 .cert-list li::before { content: "▹"; position: absolute; left: 0; color: var(--accent-color); font-weight: bold; }
+
+/* ============================================================
+   SCROLL REVEAL ANIMATIONS
+   Only animates opacity + transform for maximum performance.
+   ============================================================ */
+
+/* Base hidden state - all variants start invisible */
+.scroll-reveal--hidden.scroll-reveal--fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.scroll-reveal--hidden.scroll-reveal--fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+.scroll-reveal--hidden.scroll-reveal--fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.scroll-reveal--hidden.scroll-reveal--fade-in {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+/* Visible state - transitions to natural position */
+.scroll-reveal--visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Shared transition definition */
+.scroll-reveal {
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+/* ============================================================
+   PARALLAX DECORATIONS
+   Subtle floating shapes in the hero background layer.
+   ============================================================ */
+.parallax-bg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-orb {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 87, 34, 0.07) 0%, transparent 70%);
+  filter: blur(40px);
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.parallax-orb-2 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 223, 137, 0.05) 0%, transparent 70%);
+  filter: blur(30px);
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ============================================================
+   ACCESSIBILITY: Respect prefers-reduced-motion
+   Required per WCAG 2.1 and the assignment specification.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Immediately show all hidden scroll-reveal elements */
+  .scroll-reveal--hidden {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Terminal cursor blink animation */
+.blink-cursor {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  from, to { color: transparent }
+  50% { color: #00df89 }
+}

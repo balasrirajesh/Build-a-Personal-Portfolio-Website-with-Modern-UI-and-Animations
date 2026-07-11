@@ -1,3 +1,10 @@
+/* While the homepage is fading in, freeze ALL child animations so nothing
+   pops in individually — but exclude the home-wrapper itself so its fade-in transition works */
+body.page-loading *:not(#home-wrapper):not(#home-wrapper *):not(.splash-container):not(.splash-container *) {
+  animation: none !important;
+  transition: none !important;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

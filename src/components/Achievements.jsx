@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ScrollReveal from './ScrollReveal';
 
 const Achievements = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -36,29 +37,32 @@ const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="achievements section fade-in-up" style={{ minHeight: '100vh', paddingTop: '4rem' }}>
-      <h2 className="section-title">Achievements</h2>
+    <section id="achievements" className="achievements section" style={{ minHeight: '100vh', paddingTop: '4rem' }}>
+      <ScrollReveal animation="fade-up">
+        <h2 className="section-title">Achievements</h2>
+      </ScrollReveal>
       
       <div className="achievements-container">
         <div className="achievements-grid">
           {achievements.map((ach, index) => (
-            <div 
-              key={index} 
-              className="achievement-card glass-card" 
-              onClick={() => handleCardClick(ach)}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="achievement-img-wrapper">
-                <img src={ach.img} alt={ach.title} className="achievement-img" />
-              </div>
-              <div className="achievement-info">
-                <h4>{ach.title}</h4>
-                <p>{ach.desc}</p>
-                <div style={{ marginTop: '1rem', color: 'var(--accent-color)', fontSize: '0.9rem', fontWeight: 'bold' }}>
-                  View Details &rarr;
+            <ScrollReveal key={index} animation="fade-up" delay={index * 150}>
+              <div 
+                className="achievement-card glass-card" 
+                onClick={() => handleCardClick(ach)}
+                style={{ cursor: 'pointer', height: '100%' }}
+              >
+                <div className="achievement-img-wrapper">
+                  <img src={ach.img} alt={ach.title} className="achievement-img" />
+                </div>
+                <div className="achievement-info">
+                  <h4>{ach.title}</h4>
+                  <p>{ach.desc}</p>
+                  <div style={{ marginTop: '1rem', color: 'var(--accent-color)', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                    View Details &rarr;
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -1,12 +1,13 @@
 import React from 'react';
-import { 
-  SiDart, SiPython, SiC, SiJavascript, 
-  SiFlutter, SiHtml5, SiReact, 
-  SiFirebase, SiNodedotjs, SiExpress, 
+import {
+  SiDart, SiPython, SiC, SiJavascript,
+  SiFlutter, SiHtml5, SiReact,
+  SiFirebase, SiNodedotjs, SiExpress,
   SiMysql, SiMongodb,
   SiGit, SiGithub, SiDocker, SiJenkins, SiPostman, SiPrisma, SiApachekafka, SiRabbitmq, SiTypescript, SiPostgresql, SiRedis, SiApachemaven
 } from 'react-icons/si';
 import { FaJava, FaCss3Alt, FaTools } from 'react-icons/fa';
+import ScrollReveal from './ScrollReveal';
 
 const Skills = () => {
   const bentoCategories = [
@@ -71,13 +72,22 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section fade-in-up">
-      <h2 className="section-title" style={{ marginBottom: '4rem', textAlign: 'center' }}>Technical Skills</h2>
-      
+    <section id="skills" className="section">
+      <ScrollReveal animation="fade-up" delay={0}>
+        <h2 className="section-title" style={{ marginBottom: '4rem', textAlign: 'center' }}>Technical Skills</h2>
+      </ScrollReveal>
+
       <div className="bento-grid">
         {bentoCategories.map((category, index) => (
-          <div key={index} className="bento-category glass-card" data-area={category.gridArea}>
-            <div className="bento-header">
+          /* Each bento category fades up with a staggered delay */
+          <ScrollReveal
+            key={index}
+            animation="fade-up"
+            delay={index * 100}
+            as="div"
+            className={`bento-category glass-card`}
+          >
+            <div className="bento-header" data-area={category.gridArea}>
               {category.title}
             </div>
             <div className="bento-items">
@@ -92,7 +102,7 @@ const Skills = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </section>

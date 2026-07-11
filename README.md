@@ -1,16 +1,72 @@
-# React + Vite
+# Narendrapurapu Bala Sri Rajesh - Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A fully responsive, animated personal portfolio website built from scratch using React, Vite, Three.js, and Vanilla CSS. It showcases my experience as an App Developer and Full-Stack Software Engineer.
 
-Currently, two official plugins are available:
+## Live Project Link
+🔗 **Live Deployed URL:** [https://bala-sri-rajesh-portfolio.vercel.app](https://bala-sri-rajesh-portfolio.vercel.app) *(Note: Connect your Vercel project to deploy)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- **Responsive Grid System:** Adapts flawlessly across Mobile (375px), Tablet (768px), and Desktop (1280px) viewports with no overflow.
+- **3D Background Canvas:** Powered by Three.js (React Three Fiber & Drei), featuring Fibonacci sphere distribution particles, orbiting planets, and a scroll-tracked Dart Fighter flight indicator.
+- **On-Scroll Animations:** Lightweight, custom Intersection Observer-based entrance animations (`ScrollReveal`) animating only `transform` and `opacity` for peak performance.
+- **Parallax Scrolling Effect:** Subtle multi-layered background orbs moving at different rates relative to the user's scroll speed.
+- **Bento Box Skill Categories:** Visual presentation of programming languages, frameworks, databases, and DevOps tools.
+- **Optimal Assets:** Optimized hero and portrait images (`me.webp`) scaled and compressed under 50KB to maximize load times and Lighthouse performance.
+- **A11y/Accessibility Compliant:** Fully respects the operating system's `prefers-reduced-motion` settings, immediately showing static content and disabling transitions.
+- **SEO Ready:** Includes proper semantic HTML structure, headings hierarchy, viewport meta tags, and descriptive meta tags.
 
-## React Compiler
+## Tech Stack
+- **Frontend Core:** React 19, Vite
+- **Styling:** Custom Vanilla CSS (with responsive grid layouts, custom cursors, and blur backdrops)
+- **3D Rendering & Animation:** Three.js, `@react-three/fiber`, `@react-three/drei`
+- **Icons:** `react-icons`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## Getting Started Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Follow these steps to run the portfolio on your local machine.
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed (Node 18+ recommended).
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/balasrirajesh/portfolio.git
+cd portfolio
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Run Development Server
+```bash
+npm run dev
+```
+The application will start locally. Open the URL shown in your terminal (typically `http://localhost:5173`).
+
+### 4. Build for Production
+To bundle the project and inspect the production asset sizes:
+```bash
+npm run build
+```
+The output will be built inside the `/dist` directory.
+
+### 5. Preview the Production Build
+```bash
+npm run preview
+```
+
+---
+
+## Deployment to Vercel (Recommended)
+
+1. Sign in to your [Vercel Account](https://vercel.com).
+2. Click **Add New** > **Project** and import your public GitHub repository.
+3. Vercel will auto-detect Vite settings:
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+4. Click **Deploy**.

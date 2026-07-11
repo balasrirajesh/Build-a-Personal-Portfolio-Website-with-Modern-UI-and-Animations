@@ -34,6 +34,9 @@ const ParticleSun = ({ mouse }) => {
     return { positions: pos, originalPositions: orig };
   }, []);
 
+  const previousMousePos = useRef(new THREE.Vector3());
+  const mouseVelocity = useRef(new THREE.Vector3());
+
   useFrame((state) => {
     if (!pointsRef.current) return;
     const time = state.clock.elapsedTime;

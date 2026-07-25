@@ -19,7 +19,7 @@ const Hero = () => {
   return (
     <header className="hero">
 
-      {/* Parallax decorative background orbs — move at different speeds than scroll */}
+      {/* Parallax decorative background orbs */}
       <div
         className="parallax-orb"
         style={{
@@ -56,50 +56,59 @@ const Hero = () => {
         <ScrollReveal animation="fade-right" delay={0}>
           <div className="hero-left">
             <p className="hero-greeting">HELLO, I'M</p>
-            <h1 className="huge-text">
+            <h1 className="huge-text gradient-text">
               Bala<br/>Sri<br/>Rajesh
             </h1>
 
             <div className="hero-socials">
-              <a href="https://github.com/balasrirajesh" target="_blank" rel="noreferrer" className="social-icon"><FaGithub /> GitHub</a>
-              <a href="https://www.linkedin.com/in/bala-sri-rajesh-narendrapurapu-20b44a291/" target="_blank" rel="noreferrer" className="social-icon"><FaLinkedin /> LinkedIn</a>
+              <a href="https://github.com/balasrirajesh" target="_blank" rel="noreferrer" className="social-icon">
+                <FaGithub size={16} /> GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/bala-sri-rajesh-narendrapurapu-20b44a291/" target="_blank" rel="noreferrer" className="social-icon">
+                <FaLinkedin size={16} /> LinkedIn
+              </a>
             </div>
 
             <button onClick={() => handleScroll('resume')} className="btn primary-btn hero-resume-btn" style={{marginTop: '2rem'}}>
-              <span style={{marginRight: '10px'}}>⬇</span> RESUME
+              <span style={{marginRight: '8px', fontSize: '1.2rem'}}>↓</span> RESUME
             </button>
           </div>
         </ScrollReveal>
 
-        {/* Center Column: Portrait Image */}
+        {/* Center Column: Portrait Image (Massive & Animated) */}
         <div className="hero-center">
-          <div className="hero-image-container">
+          <div className="hero-image-container floating-hero-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
             <img
               src={heroImage}
               alt="Narendrapurapu Bala Sri Rajesh - App Developer"
               className="hero-image"
               style={{
-                boxShadow: 'none',
-                borderRadius: '0',
-                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-                filter: 'drop-shadow(0 0 20px rgba(0, 230, 150, 0.15))'
+                width: '100%',
+                maxWidth: '850px',
+                maxHeight: '850px',
+                transform: 'scale(1.22)',
+                objectFit: 'contain',
+                objectPosition: 'center bottom',
+                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)',
+                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)',
+                filter: 'drop-shadow(0 0 45px rgba(0, 223, 137, 0.35))',
+                transition: 'all 0.4s var(--ease-out-expo)'
               }}
             />
           </div>
         </div>
 
-        {/* Right Column: Roles */}
+        {/* Right Column: Roles (Original Clean Design) */}
         <ScrollReveal animation="fade-left" delay={150}>
-          <div className="hero-right" style={{ textAlign: 'left' }}>
-            <p className="hero-greeting" style={{ textAlign: 'left', marginBottom: '0.5rem', fontSize: '1rem', letterSpacing: '3px' }}>
+          <div className="hero-right">
+            <p className="hero-greeting" style={{ marginBottom: '0.5rem', fontSize: '0.85rem', letterSpacing: '3px' }}>
               I'M AN
             </p>
-            <h2 className="hero-role-title" style={{ textAlign: 'left', margin: 0 }}>
+            <h2 className="hero-role-title gradient-orange-text" style={{ margin: 0 }}>
               APP<br/>DEVELOPER
             </h2>
-            <p className="hero-availability" style={{ textAlign: 'left', marginTop: '1.5rem' }}>
-              <span className="accent-dash">-</span> Open to work
+            <p className="hero-availability" style={{ marginTop: '1.5rem' }}>
+              <span className="pulse-dot"></span> Open to work
             </p>
           </div>
         </ScrollReveal>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   SiDart, SiPython, SiC, SiJavascript,
   SiFlutter, SiHtml5, SiReact,
@@ -71,23 +71,37 @@ const Skills = () => {
     }
   ];
 
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <section id="skills" className="section">
       <ScrollReveal animation="fade-up" delay={0}>
-        <h2 className="section-title" style={{ marginBottom: '4rem', textAlign: 'center' }}>Technical Skills</h2>
+        <div className="section-title-wrapper">
+          <p className="section-subtitle">TECH STACK & TOOLS</p>
+          <h2 className="section-title">Technical Skills</h2>
+        </div>
       </ScrollReveal>
 
       <div className="bento-grid">
         {bentoCategories.map((category, index) => (
-          /* Each bento category fades up with a staggered delay */
           <ScrollReveal
             key={index}
             animation="fade-up"
             delay={index * 100}
             as="div"
-            className={`bento-category glass-card`}
+            className="bento-category"
+            data-area={category.gridArea}
+            onMouseMove={handleMouseMove}
+            style={{ position: 'relative' }}
           >
-            <div className="bento-header" data-area={category.gridArea}>
+            <div className="bento-header">
               {category.title}
             </div>
             <div className="bento-items">

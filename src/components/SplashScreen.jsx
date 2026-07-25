@@ -59,7 +59,7 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
 
       starsRef.current.forEach(star => {
         let isStarZooming = false;
-        
+
         if (isHyperspaceRef.current) {
           const timeSinceHyper = timestamp - hyperStartTimeRef.current;
           if (timeSinceHyper > star.waveDelay) {
@@ -88,25 +88,25 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
             star.speed = star.baseSpeed; // Reset speed for recycled stars
           } else {
             // Keep it permanently off-screen
-            star.opacity = 0; 
+            star.opacity = 0;
           }
         }
 
         if (star.opacity > 0) {
           // Fade in gradually if not fully visible
           if (star.opacity < 0.8) {
-             star.opacity += 0.02;
+            star.opacity += 0.02;
           }
 
           const x = cx + Math.cos(star.angle) * star.radius;
           const y = cy + Math.sin(star.angle) * star.radius;
-          
+
           // Stretch the star into a long streak based on its current speed
           let tailLength = isStarZooming ? Math.max(10, star.speed * 3) : 10;
-          
+
           // CRITICAL FIX: Ensure the tail of the streak never crosses back into the hollow center!
           if (star.radius - tailLength < star.startRadius) {
-             tailLength = Math.max(0.1, star.radius - star.startRadius);
+            tailLength = Math.max(0.1, star.radius - star.startRadius);
           }
 
           const tailX = x - Math.cos(star.angle) * tailLength;
@@ -119,13 +119,13 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
           // Thicken the star slightly as it zooms past
           ctx.lineWidth = isStarZooming ? Math.min(6, 2 + (star.speed / 20)) : 2;
           ctx.lineCap = "round";
-          
+
           // Add glow
           ctx.shadowColor = '#ff5722';
           ctx.shadowBlur = isStarZooming ? 15 : 5;
-          
+
           ctx.stroke();
-          
+
           // Reset shadow for performance on next iteration
           ctx.shadowBlur = 0;
         }
@@ -162,22 +162,22 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
             // Trigger hyperspace inside the canvas loop
             isHyperspaceRef.current = true;
             hyperStartTimeRef.current = performance.now();
-            
+
             // Allow stars to streak for 2.4 seconds, then immediately crossfade
             timeoutId = setTimeout(() => {
               // Trigger homepage fade-in immediately
               if (onFadeStart) onFadeStart();
               setFadeOut(true);
-              
+
               // Stop recycling 100ms later — last stars trail off as homepage appears
               const stopTimer = setTimeout(() => { stopRecyclingRef.current = true; }, 100);
-              
+
               // Unmount splash after fade completes
               timeoutId = setTimeout(() => {
                 clearTimeout(stopTimer);
                 if (onComplete) onComplete();
               }, 400);
-            }, 2400); 
+            }, 2400);
           }, 800);
         }, 400);
       }
@@ -189,9 +189,9 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
 
   return (
     <div className={`splash-container ${fadeOut ? 'fade-out' : ''}`}>
-      <canvas 
-        ref={canvasRef} 
-        className="warp-scene" 
+      <canvas
+        ref={canvasRef}
+        className="warp-scene"
       />
 
       <div className="splash-text-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0 2rem' }}>
@@ -209,7 +209,7 @@ const SplashScreen = ({ onComplete, onFadeStart }) => {
           }}
         >
           {text}
-          <span className="cursor-blink" style={{ opacity: showText ? 1 : 0 }}></span>
+          {text && <span className="cursor-blink" style={{ opacity: showText ? 1 : 0 }}></span>}
         </h1>
       </div>
     </div>

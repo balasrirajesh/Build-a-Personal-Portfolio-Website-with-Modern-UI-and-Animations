@@ -51,19 +51,28 @@ const Navbar = ({ activePage }) => {
             className="reach-out-btn" 
             onClick={() => handleNavClick('contact')}
             style={{
-              background: 'transparent',
+              background: 'rgba(255, 87, 34, 0.05)',
               border: '1px solid var(--accent-color)',
               color: 'var(--accent-color)',
-              padding: '0.4rem 1.2rem',
+              padding: '0.45rem 1.3rem',
               borderRadius: '20px',
               fontFamily: 'var(--font-code)',
               fontSize: '0.8rem',
+              fontWeight: '600',
               letterSpacing: '1px',
               cursor: 'pointer',
-              transition: 'all 0.3s'
+              transition: 'all 0.3s var(--ease-out-expo)'
             }}
-            onMouseOver={(e) => { e.target.style.background = 'var(--accent-color)'; e.target.style.color = 'var(--bg-color)'; }}
-            onMouseOut={(e) => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--accent-color)'; }}
+            onMouseOver={(e) => { 
+              e.currentTarget.style.background = 'var(--accent-color)'; 
+              e.currentTarget.style.color = '#ffffff'; 
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 87, 34, 0.4)';
+            }}
+            onMouseOut={(e) => { 
+              e.currentTarget.style.background = 'rgba(255, 87, 34, 0.05)'; 
+              e.currentTarget.style.color = 'var(--accent-color)'; 
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             REACH OUT
           </button>

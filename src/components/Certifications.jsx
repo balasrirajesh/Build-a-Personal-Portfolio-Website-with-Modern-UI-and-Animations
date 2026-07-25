@@ -24,13 +24,16 @@ const Certifications = () => {
   return (
     <section id="certifications" className="section">
       <ScrollReveal animation="fade-up">
-        <h2 className="section-title">Certifications</h2>
+        <div className="section-title-wrapper">
+          <p className="section-subtitle">CREDENTIALS & VERIFICATIONS</p>
+          <h2 className="section-title">Certifications</h2>
+        </div>
       </ScrollReveal>
       
-      {/* Fully responsive bento-like grid using auto-fit minmax */}
+      {/* Responsive grid */}
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', 
         gap: '1.5rem', 
         maxWidth: '1400px', 
         margin: '0 auto' 
@@ -43,22 +46,67 @@ const Certifications = () => {
             as="div"
             className="glass-card"
             style={{ 
-              padding: '1.5rem', 
+              padding: '1.8rem 1.5rem', 
               display: 'flex', 
               flexDirection: 'column', 
               alignItems: 'center', 
               textAlign: 'center',
-              height: '100%'
+              height: '100%',
+              background: 'rgba(14, 19, 28, 0.65)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)'
             }}
           >
-            <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: 'rgba(255, 87, 34, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
-              <FaAward size={40} />
+            <div style={{ 
+              width: '75px', 
+              height: '75px', 
+              borderRadius: '50%', 
+              backgroundColor: 'rgba(255, 87, 34, 0.08)', 
+              border: '1px solid rgba(255, 87, 34, 0.25)',
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginBottom: '1.5rem', 
+              color: 'var(--accent-color)',
+              boxShadow: '0 0 20px rgba(255, 87, 34, 0.15)'
+            }}>
+              <FaAward size={36} />
             </div>
-            <h3 style={{ fontSize: '1.3rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{cert.title}</h3>
-            <h4 style={{ color: 'var(--accent-color)', marginBottom: '1rem', fontWeight: '500' }}>{cert.org}</h4>
-            <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
-               <a href={cert.link} target="_blank" rel="noopener noreferrer" className="btn secondary-btn" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                 <FaExternalLinkAlt /> View Certificate
+            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.4rem', fontWeight: '700' }}>{cert.title}</h3>
+            <h4 style={{ color: 'var(--accent-emerald)', marginBottom: '1rem', fontWeight: '500', fontFamily: 'var(--font-code)', fontSize: '0.85rem' }}>{cert.org}</h4>
+            <div style={{ marginTop: 'auto', paddingTop: '1.2rem' }}>
+               <a 
+                 href={cert.link} 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 style={{ 
+                   padding: '0.65rem 1.4rem', 
+                   fontSize: '0.82rem', 
+                   display: 'inline-flex', 
+                   alignItems: 'center', 
+                   gap: '0.5rem',
+                   borderRadius: '25px',
+                   border: '1px solid rgba(255, 255, 255, 0.1)',
+                   background: 'rgba(255, 255, 255, 0.04)',
+                   color: 'var(--text-primary)',
+                   fontFamily: 'var(--font-code)',
+                   textDecoration: 'none',
+                   transition: 'all 0.3s var(--ease-out-expo)'
+                 }}
+                 onMouseOver={(e) => {
+                   e.currentTarget.style.borderColor = 'var(--accent-color)';
+                   e.currentTarget.style.background = 'rgba(255, 87, 34, 0.1)';
+                   e.currentTarget.style.color = 'var(--accent-color)';
+                   e.currentTarget.style.transform = 'translateY(-2px)';
+                 }}
+                 onMouseOut={(e) => {
+                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                   e.currentTarget.style.color = 'var(--text-primary)';
+                   e.currentTarget.style.transform = 'translateY(0)';
+                 }}
+               >
+                 <FaExternalLinkAlt size={12} /> View Credential
                </a>
             </div>
           </ScrollReveal>

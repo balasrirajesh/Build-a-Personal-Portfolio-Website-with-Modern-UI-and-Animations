@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import ScrollReveal from './ScrollReveal';
 
 const Projects = () => {
@@ -55,37 +55,48 @@ const Projects = () => {
     }
   ];
 
-  const filteredProjects = activeFilter === 'All' 
-    ? projectsData 
+  const filteredProjects = activeFilter === 'All'
+    ? projectsData
     : projectsData.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projects" className="section" style={{ padding: '120px 2%' }}>
-      <div style={{ width: '100%', margin: '0 auto' }}>
-        
+    <section id="projects" className="section" style={{ padding: '120px 5%' }}>
+      <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+
         {/* Header Section */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3.5rem', flexWrap: 'wrap', gap: '2rem' }}>
           <ScrollReveal animation="fade-right">
             <div>
-              <p className="hero-greeting" style={{ marginBottom: '0.5rem', fontSize: '0.8rem' }}>PROJECTS GALLERY</p>
-              <h2 className="section-title" style={{ margin: 0, border: 'none', padding: 0 }}>All Projects</h2>
+              <p className="section-subtitle" style={{ marginBottom: '0.5rem' }}>FEATURED WORKS</p>
+              <h2 className="section-title" style={{ margin: 0, textAlign: 'left' }}>Projects Gallery</h2>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal animation="fade-left">
-            <div style={{ display: 'flex', gap: '2rem', fontFamily: 'var(--font-code)', fontSize: '0.9rem' }}>
+            <div style={{
+              display: 'flex',
+              gap: '0.5rem',
+              background: 'rgba(255,255,255,0.03)',
+              padding: '0.3rem',
+              borderRadius: '30px',
+              border: '1px solid var(--card-border)',
+              fontFamily: 'var(--font-code)',
+              fontSize: '0.85rem'
+            }}>
               {filters.map(filter => (
-                <button 
-                  key={filter} 
+                <button
+                  key={filter}
                   onClick={() => setActiveFilter(filter)}
                   style={{
-                    background: 'none',
+                    background: activeFilter === filter ? 'var(--accent-color)' : 'transparent',
                     border: 'none',
-                    color: activeFilter === filter ? 'var(--accent-color)' : 'var(--text-secondary)',
-                    borderBottom: activeFilter === filter ? '2px solid var(--accent-color)' : '2px solid transparent',
-                    paddingBottom: '0.5rem',
+                    color: activeFilter === filter ? '#ffffff' : 'var(--text-secondary)',
+                    padding: '0.5rem 1.2rem',
+                    borderRadius: '25px',
+                    fontWeight: activeFilter === filter ? '700' : '500',
                     cursor: 'pointer',
-                    transition: 'all 0.3s'
+                    transition: 'all 0.3s var(--ease-out-expo)',
+                    boxShadow: activeFilter === filter ? '0 0 15px rgba(255, 87, 34, 0.4)' : 'none'
                   }}
                 >
                   {filter}
@@ -94,60 +105,70 @@ const Projects = () => {
             </div>
           </ScrollReveal>
         </div>
-        
+
         {/* Border separator */}
-        <div style={{ width: '100%', height: '1px', background: 'var(--card-border)', marginBottom: '4rem' }}></div>
+        <div style={{ width: '100%', height: '1px', background: 'var(--card-border)', marginBottom: '3.5rem' }}></div>
 
         {/* Grid Layout */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 500px), 1fr))', gap: '2rem' }}>
           {filteredProjects.map((project, index) => (
             <ScrollReveal key={project.id} animation="fade-up" delay={index * 100}>
-              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', transition: 'all 0.4s var(--ease-out-expo)' }}>
                 <div style={{ flexGrow: 1 }}>
-                  <p style={{ fontFamily: 'var(--font-code)', color: 'var(--accent-color)', fontSize: '0.75rem', letterSpacing: '2px', marginBottom: '1rem' }}>
+                  <p style={{ fontFamily: 'var(--font-code)', color: 'var(--accent-emerald)', fontSize: '0.75rem', letterSpacing: '2px', marginBottom: '1rem' }}>
                     {project.subtitle}
                   </p>
-                  <h3 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1.5rem', fontWeight: '800' }}>
+                  <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '1.2rem', fontWeight: '800' }}>
                     {project.title}
                   </h3>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1rem', marginBottom: '2rem' }}>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '0.98rem', marginBottom: '2rem' }}>
                     {project.shortDesc}
                   </p>
                 </div>
-                
+
                 <div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', marginBottom: '2rem' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2rem' }}>
                     {project.stack.map((tech, i) => (
                       <span key={i} style={{
-                        border: '1px solid var(--card-border)',
-                        background: 'rgba(0,0,0,0.2)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        background: 'rgba(255, 255, 255, 0.03)',
                         color: 'var(--text-secondary)',
-                        padding: '0.4rem 1rem',
+                        padding: '0.4rem 0.9rem',
                         borderRadius: '20px',
                         fontFamily: 'var(--font-code)',
-                        fontSize: '0.7rem',
+                        fontSize: '0.72rem',
                         letterSpacing: '1px'
                       }}>{tech}</span>
                     ))}
                   </div>
-                  
+
                   <a href={project.github} target="_blank" rel="noreferrer" style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.8rem',
-                    border: '1px solid var(--card-border)',
-                    padding: '0.6rem 1.2rem',
+                    border: '1px solid var(--accent-color)',
+                    background: 'rgba(255, 87, 34, 0.05)',
+                    padding: '0.65rem 1.4rem',
                     borderRadius: '30px',
                     color: 'var(--text-primary)',
                     textDecoration: 'none',
-                    fontSize: '0.8rem',
+                    fontSize: '0.85rem',
                     fontFamily: 'var(--font-code)',
-                    transition: 'all 0.3s'
+                    fontWeight: '600',
+                    transition: 'all 0.3s var(--ease-out-expo)'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.borderColor = 'var(--text-primary)'}
-                  onMouseOut={(e) => e.currentTarget.style.borderColor = 'var(--card-border)'}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'var(--accent-color)';
+                      e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 87, 34, 0.5)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 87, 34, 0.05)';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
                   >
-                    <FaGithub size={16} /> View Repo
+                    <FaGithub size={16} /> View Repository
                   </a>
                 </div>
               </div>

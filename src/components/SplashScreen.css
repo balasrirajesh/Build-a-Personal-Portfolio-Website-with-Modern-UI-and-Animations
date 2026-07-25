@@ -63,12 +63,13 @@
 
 .cursor-blink {
   display: inline-block;
-  width: 12px;
-  height: 1.2em;
-  background-color: var(--text-primary, #ffffff);
+  width: 4px;
+  height: 1.1em;
+  background-color: var(--accent-emerald, #00df89);
   vertical-align: middle;
-  margin-left: 8px;
-  animation: blink 1s step-end infinite;
+  margin-left: 6px;
+  animation: blink 0.8s step-end infinite;
+  box-shadow: 0 0 10px var(--accent-emerald, #00df89);
 }
 
 @keyframes blink {

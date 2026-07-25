@@ -37,9 +37,12 @@ const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="achievements section" style={{ minHeight: '100vh', paddingTop: '4rem' }}>
+    <section id="achievements" className="achievements section" style={{ minHeight: '80vh' }}>
       <ScrollReveal animation="fade-up">
-        <h2 className="section-title">Achievements</h2>
+        <div className="section-title-wrapper">
+          <p className="section-subtitle">MILESTONES & RECOGNITION</p>
+          <h2 className="section-title">Achievements</h2>
+        </div>
       </ScrollReveal>
       
       <div className="achievements-container">
@@ -57,7 +60,7 @@ const Achievements = () => {
                 <div className="achievement-info">
                   <h4>{ach.title}</h4>
                   <p>{ach.desc}</p>
-                  <div style={{ marginTop: '1rem', color: 'var(--accent-color)', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                  <div style={{ marginTop: '1.2rem', color: 'var(--accent-emerald)', fontSize: '0.88rem', fontWeight: 'bold', fontFamily: 'var(--font-code)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     View Details &rarr;
                   </div>
                 </div>
@@ -68,19 +71,19 @@ const Achievements = () => {
       </div>
 
       {selectedItem && (
-        <div className="modal-overlay" onClick={closeModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(10,25,47,0.85)', backdropFilter: 'blur(5px)', zIndex: 1000 }}>
-          <div className="modal-content glass-card fade-in-up" onClick={e => e.stopPropagation()} style={{ maxWidth: '700px', width: '90%', maxHeight: '90vh', overflowY: 'auto', padding: '2rem', position: 'relative' }}>
-            <button className="modal-close" onClick={closeModal} style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.1)', border: 'none', color: 'var(--text-primary)', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s ease' }} onMouseOver={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'} onMouseOut={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}>
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
               &times;
             </button>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <img src={selectedItem.completionImg} alt={selectedItem.title} style={{ maxWidth: '100%', maxHeight: '350px', borderRadius: '12px', objectFit: 'contain', border: '1px solid var(--card-border)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} />
+              <img src={selectedItem.completionImg} alt={selectedItem.title} style={{ maxWidth: '100%', maxHeight: '350px', borderRadius: '14px', objectFit: 'contain', border: '1px solid var(--card-border)', boxShadow: '0 15px 35px rgba(0,0,0,0.5)' }} />
             </div>
-            <h3 style={{ color: 'var(--accent-color)', marginBottom: '0.5rem', fontSize: '2rem' }}>{selectedItem.title}</h3>
-            <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', fontSize: '1.2rem', fontWeight: '500' }}>{selectedItem.desc}</h4>
+            <h3 style={{ color: 'var(--accent-color)', marginBottom: '0.5rem', fontSize: '2rem', fontWeight: '800' }}>{selectedItem.title}</h3>
+            <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', fontSize: '1.15rem', fontWeight: '500' }}>{selectedItem.desc}</h4>
             <div style={{ height: '1px', background: 'var(--card-border)', marginBottom: '1.5rem' }}></div>
-            <h5 style={{ color: 'var(--text-primary)', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Completion Details</h5>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.05rem' }}>{selectedItem.details}</p>
+            <h5 style={{ color: 'var(--accent-emerald)', marginBottom: '0.8rem', fontSize: '1rem', fontFamily: 'var(--font-code)', textTransform: 'uppercase', letterSpacing: '1px' }}>Completion Details</h5>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.02rem' }}>{selectedItem.details}</p>
           </div>
         </div>
       )}
